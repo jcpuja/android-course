@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="more_info_message">Inspired by the works of artists such as Piet Mondrian and Ben Nicholson.
+
+Find out more by visiting MOMA\'s website:</string>
+    <string name="more_info_notnow">Not now</string>
+    <string name="more_info_opensite">Open website</string>
+</resources>
