@@ -19,3 +19,4 @@ proguard/
 *.log
 # IntelliJ project file
 *.iml
+.idea/
