@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,11 +15,18 @@ import java.util.List;
 public class ImageGridAdapter extends BaseAdapter {
 
     private List<File> photos;
+    private File storageDir;
     private Activity activity;
 
     public ImageGridAdapter(File storageDir, Activity activity) {
+        this.storageDir = storageDir;
         this.activity = activity;
+        refreshPhotos();
+    }
+
+    public void refreshPhotos() {
         photos = new ArrayList<File>(Arrays.asList(storageDir.listFiles()));
+        notifyDataSetChanged();
     }
 
     @Override
@@ -40,15 +46,14 @@ public class ImageGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView = (ImageView) convertView;
+        SelfieThumbnail thumbnail = (SelfieThumbnail) convertView;
 
-        if (imageView == null) {
-            imageView = new ImageView(activity);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        if (thumbnail == null) {
+            thumbnail = new SelfieThumbnail(activity);
         }
 
         Bitmap bitmap = BitmapFactory.decodeFile(photos.get(position).getAbsolutePath());
-        imageView.setImageBitmap(bitmap);
-        return imageView;
+        thumbnail.setImageBitmap(bitmap);
+        return thumbnail;
     }
 }
