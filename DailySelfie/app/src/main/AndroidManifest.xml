@@ -2,18 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jcpuja.dailyselfie" >
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.Camera" android:required="true"/>
+    <uses-feature
+        android:name="android.hardware.Camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name=".PhotoGridActivity"
             android:label="@string/activity_label" >
@@ -22,6 +23,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ViewSelfieActivity"
+            android:label="@string/title_activity_view_selfie"
+            android:parentActivityName=".PhotoGridActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jcpuja.dailyselfie.PhotoGridActivity" />
         </activity>
     </application>
 

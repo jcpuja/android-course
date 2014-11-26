@@ -8,6 +8,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -22,15 +24,23 @@ public class PhotoGridActivity extends Activity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private final File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "dailyselfie");
     private final ImageGridAdapter adapter = new ImageGridAdapter(storageDir, this);
-    private GridView selfieGrid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_grid);
 
-        selfieGrid = (GridView) findViewById(R.id.selfieGrid);
+        GridView selfieGrid = (GridView) findViewById(R.id.selfieGrid);
         selfieGrid.setAdapter(adapter);
+
+        selfieGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), ViewSelfieActivity.class);
+                i.setData(Uri.fromFile((File) adapter.getItem(position)));
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -42,9 +52,6 @@ public class PhotoGridActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_selfie) {
             takePicture();
