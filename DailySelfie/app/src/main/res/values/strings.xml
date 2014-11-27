@@ -5,5 +5,6 @@
     <string name="action_selfie">Take a selfie</string>
     <string name="activity_label">Let me take a selfie</string>
     <string name="title_activity_view_selfie">Check me out!</string>
+    <string name="action_cancel_alarms">Cancel alarms</string>
 
 </resources>

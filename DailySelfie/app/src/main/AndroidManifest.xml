@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jcpuja.dailyselfie" >
+    package="com.jcpuja.dailyselfie">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -14,10 +14,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".PhotoGridActivity"
-            android:label="@string/activity_label" >
+            android:label="@string/activity_label">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,11 +27,13 @@
         <activity
             android:name=".ViewSelfieActivity"
             android:label="@string/title_activity_view_selfie"
-            android:parentActivityName=".PhotoGridActivity" >
+            android:parentActivityName=".PhotoGridActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jcpuja.dailyselfie.PhotoGridActivity" />
         </activity>
+
+        <receiver android:name=".AlarmNotificationReceiver" />
     </application>
 
 </manifest>

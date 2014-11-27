@@ -1,10 +1,14 @@
 package com.jcpuja.dailyselfie;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,8 +26,11 @@ import java.util.Date;
 public class PhotoGridActivity extends Activity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final long INITIAL_ALARM_DELAY = 1000 * 10;
     private final File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "dailyselfie");
     private final ImageGridAdapter adapter = new ImageGridAdapter(storageDir, this);
+    private AlarmManager alarmManager;
+    private PendingIntent alarmPendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,11 @@ public class PhotoGridActivity extends Activity {
             }
         });
 
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent notificationIntent = new Intent(this, AlarmNotificationReceiver.class);
+        alarmPendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, 0);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + INITIAL_ALARM_DELAY, INITIAL_ALARM_DELAY, alarmPendingIntent);
+
     }
 
     @Override
@@ -55,6 +67,8 @@ public class PhotoGridActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_selfie) {
             takePicture();
+        } else if (id == R.id.action_cancel_alarms) {
+            alarmManager.cancel(alarmPendingIntent);
         }
         return super.onOptionsItemSelected(item);
     }
