@@ -6,5 +6,7 @@
     <string name="activity_label">Let me take a selfie</string>
     <string name="title_activity_view_selfie">Check me out!</string>
     <string name="action_cancel_alarms">Cancel alarms</string>
+    <string name="notification_title">Selfie time</string>
+    <string name="notification_text">Let us take a selfie</string>
 
 </resources>

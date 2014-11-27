@@ -26,7 +26,7 @@ import java.util.Date;
 public class PhotoGridActivity extends Activity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    private static final long INITIAL_ALARM_DELAY = 1000 * 10;
+    private static final long INITIAL_ALARM_DELAY = 1000 * 60;
     private final File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "dailyselfie");
     private final ImageGridAdapter adapter = new ImageGridAdapter(storageDir, this);
     private AlarmManager alarmManager;
